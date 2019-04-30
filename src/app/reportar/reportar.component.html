@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="centralizar">
+    <h2>Reportar Problema</h2>
+    <form (ngSubmit)="onSubmit()" #formulario="ngForm" action="auth.php" method="post">
+      <div class="row">
+        <div class="form-group col-sm-12">
+          Foto do problema
+          <input required type="file" class="form-control" name="img" [(ngModel)]="problema.img" id="inputFile" (change) = "onChangeImagem($event)"/>
+          <label class="form-group col-sm-12" >{{Service.nomeImg}}</label>
+        </div>
+        <div class="form-group col-sm-8">
+          CEP
+          <input type="text" class="form-control" required name="cep" [(ngModel)]="problema.cep"
+            (change)="onChange($event)" pattern="[0-9 ' ']+" minlength="8" maxlength="8" />
+        </div>
+        <div class="form-group col-sm-4">
+          Data
+          <input type="text" class="form-control" required name="data" [(ngModel)]="problema.data" disabled />
+        </div>
+        <div class="form-group col-sm-8">
+          Rua
+          <input type="text" class="form-control" required name="rua" [(ngModel)]="problema.rua" disabled />
+        </div>
+        <div class="form-group col-sm-4">
+          Bairro
+          <input type="text" class="form-control" required name="bairro" [(ngModel)]="problema.bairro" disabled />
+        </div>
+        <div class="form-group col-sm-8">
+          Localidade
+          <input type="text" class="form-control" required name="localidade" [(ngModel)]="problema.localidade"
+            disabled />
+        </div>
+        <div class="form-group col-sm-2">
+          UF
+          <input type="text" class="form-control" required name="uf" [(ngModel)]="problema.uf" disabled />
+        </div>
+        <div class="form-group col-sm-2">
+          Tipo do Problema
+          <select id="inputState" class="form-control" name = "tipoProblema" [(ngModel)]="problema.tipoProblema">
+            <option>Lixo</option>
+            <option>Buraco na Rua</option>
+            <option>Saneamento</option>
+            <option>Alagamento</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-12">
+          Descrição do problema
+          <input type="text" class="form-control" required name="descricao" [(ngModel)]="problema.descricao" />
+        </div>
+      </div>
+      <button class="btn btn-dark" type="submit" [disabled]="!formulario.valid">Salvar</button>
+    </form>
+
+  </div>
+
+</div>

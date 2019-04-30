@@ -1,0 +1,97 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+  <a id="logo">
+    <img src="../../assets/image/logo.png" />
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item "><a class="nav-link" href="" routerLink="">Página Inicial</a></li>
+      <li class="nav-item" *ngIf="logado"><a class="nav-link" href="" routerLink="/reportar">Reportar Problema</a></li>
+      <li class="nav-item"><a class="nav-link" href="" routerLink="/listar">Consultar Problema</a></li>
+    </ul>
+    <div class="user-panel row" *ngIf="!logado" id="login">
+      <a href="" (click)="modal('Login','Logar')" data-toggle="modal" data-target="#exampleModal">Login</a> <a href=""
+        (click)="modal('Registrar','Salvar')" data-toggle="modal" data-target="#exampleModal">Register</a>
+    </div>
+    <div class="user-panel row" *ngIf="logado">
+      <div class="btn-group">
+        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{userAux.nomeCompleto}}
+        </button>
+        <div class="dropdown-menu" id="drop">
+          <a class="dropdown-item" href="" (click)="sair()">Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="login-form">
+          <form method="post" #formulario="ngForm">
+            <h2 class="text-center">{{opcao.titulo}}</h2>
+            <div *ngIf="opcao.titulo === 'Login'">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="CPF" required="required"
+                  [(ngModel)]="userAux.cpf" name="Cpf" required>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" required="required"
+                  [(ngModel)]="userAux.senha" name="Senha" required>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block" data-dismiss="modal" aria-label="Close"
+                  (click)="logar()" [disabled]="!formulario.valid">{{opcao.botao}}</button>
+              </div>
+            </div>
+
+            <div *ngIf="opcao.titulo === 'Registrar'">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Nome Completo" required="required"
+                  [(ngModel)]="userAux.nomeCompleto" name="nomeCompleto" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="RG" required="required"
+                  [(ngModel)]="userAux.rg" name="rg" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="CPF" required="required"
+                  [(ngModel)]="userAux.cpf" name="cpf" required minlength="11" maxlength="11" pattern="[0-9 ' ']+">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="CEP" required="required"
+                  [(ngModel)]="userAux.cep" name="cep" required minlength="8" maxlength="8" pattern="[0-9 ' ']+">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Contato" required="required"
+                  [(ngModel)]="userAux.contato" name="contato" required pattern="[0-9 ' ']+" minlength="9" maxlength="9">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Password" required="required"
+                  [(ngModel)]="userAux.senha" name="Senha" required>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block" data-dismiss="modal" aria-label="Close"
+                  (click)="salvarUser()" [disabled]="!formulario.valid" >{{opcao.botao}}</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>

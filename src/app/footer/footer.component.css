@@ -1,0 +1,52 @@
+.footer-section {
+	text-align: center;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#330d38+0,190d36+100 */
+    background: radial-gradient(ellipse at center, #19882c 1%, #025310 100%);
+
+    
+}
+.footer-section .container {
+    padding: 20px 5px 15px;
+    
+}
+
+.footer-logo{
+	width: 30%;
+	position: relative;
+}
+
+.footer-social {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.copyright,a {
+	font-size: 12px;
+	font-weight: 500;
+	color: #2E2E2E;
+	opacity: 0.80;
+}
+
+.copyright a {
+	color: #2E2E2E;
+}
+
+.copyright a:hover {
+	text-decoration: underline;
+}
+a{
+	padding: 10px;
+}
+
+.contact a, i, h5{
+	color: #2E2E2E
+}
+
+.contact a:hover{
+	color: #009EE7;
+	border-radius: 10px;
+}
+a i:hover{
+	color: #009EE7
+}
+
