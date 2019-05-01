@@ -13,6 +13,7 @@ export class ListarComponent implements OnInit {
     this.problema = servico.listarProblemas();
     console.log(this.problema)
   }
+  
   ngOnInit() {
 
   }

@@ -17,15 +17,20 @@ export class AppService implements OnInit {
   userAux = { nomeCompleto: undefined, senha: undefined, rg: undefined, cpf: undefined, cep: undefined, contato: undefined };
   indice = undefined;
   constructor(private http: HttpClient, private db: AngularFireDatabase) {
-    console.log(http.post('http://localhost/projetoSocial/api/select.php', { op: "problema" }).pipe(take(1)).subscribe((problema) => {
-      this.problema = problema; this.problema.sort((a,b)=>a.id-b.id)
-    }));
-    console.log(http.post('http://localhost/projetoSocial/api/select.php', { op: "user" }).pipe(take(1)).subscribe((user) => {
-      this.user = user;this.user.sort((a,b)=>a.id-b.id)
-    }));
-    
+    this.pegarDoBanco("problema");
+    this.pegarDoBanco("user");
   }
   ngOnInit() {
+  }
+  pegarDoBanco(op){
+    if(op === "problema")
+      console.log(this.http.post('http://localhost/projetoSocial/api/select.php', { op: op }).pipe(take(1)).subscribe((problema) => {
+        this.problema = problema; this.problema.sort((a,b)=>a.id-b.id)
+      }));
+    else
+      console.log(this.http.post('http://localhost/projetoSocial/api/select.php', { op: op }).pipe(take(1)).subscribe((user) => {
+        this.user = user;this.user.sort((a,b)=>a.id-b.id)
+      }));
   }
   salvarImagem(problema,imagem) {
     this.http.post('http://localhost/projetoSocial/api/salvarImg.php', imagem).pipe().subscribe((dados) => { this.nomeImg = dados;this.salvarProblema(problema, imagem) })
@@ -45,11 +50,12 @@ export class AppService implements OnInit {
     }
     if (problema.report == undefined) {
       problema.report = 1;
+      problema.img = this.nomeImg;
       this.problema.push(problema);
       this.http.post('http://localhost/projetoSocial/api/salvarProblema.php', { problema: problema, tamanho: (this.problema.length), nome:this.nomeImg }).pipe().subscribe((dados) => { this.nomeImg=undefined;})
     }
     this.http.post('http://localhost/projetoSocial/api/update.php',{report:problema.report,id:this.indice}).pipe().subscribe((dados) => { this.nomeImg=undefined;})
-    
+    this.pegarDoBanco("problema");
   }
   // delete(indice) {
   //   if (this.problema[indice].report > 1) {
@@ -87,6 +93,7 @@ export class AppService implements OnInit {
     for (let index = 0; index < this.user.length; index++) {
       if (user.rg == this.user[index].rg && user.cpf == this.user[index].cpf)
         user = {};
+        alert("Esse usuario ja está registrado");
     }
     if (user != {})
       this.http.post('http://localhost/projetoSocial/api/salvarUser.php', { user: user, tamanho: (this.user.length + 1) }).pipe().subscribe((dados) => { console.log(dados); })
