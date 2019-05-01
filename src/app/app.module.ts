@@ -8,12 +8,9 @@ import {FormsModule} from '@angular/forms'
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { ReportarComponent } from './reportar/reportar.component';
-import {environment} from '../environments/environment'
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './services/auth.guard';
 
-import {AngularFireModule} from '@angular/fire'
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ListarComponent } from './listar/listar.component'
 
 @NgModule({
@@ -29,8 +26,6 @@ import { ListarComponent } from './listar/listar.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
     HttpClientModule
   ],
   providers: [AuthGuard],

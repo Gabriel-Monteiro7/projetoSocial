@@ -1,5 +1,4 @@
 import { Injectable, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -16,7 +15,7 @@ export class AppService implements OnInit {
   user: any = [];
   userAux = { nomeCompleto: undefined, senha: undefined, rg: undefined, cpf: undefined, cep: undefined, contato: undefined };
   indice = undefined;
-  constructor(private http: HttpClient, private db: AngularFireDatabase) {
+  constructor(private http: HttpClient) {
     this.pegarDoBanco("problema");
     this.pegarDoBanco("user");
   }
@@ -52,10 +51,11 @@ export class AppService implements OnInit {
       problema.report = 1;
       problema.img = this.nomeImg;
       this.problema.push(problema);
-      this.http.post('http://localhost/projetoSocial/api/salvarProblema.php', { problema: problema, tamanho: (this.problema.length), nome:this.nomeImg }).pipe().subscribe((dados) => { this.nomeImg=undefined;})
+      this.http.post('http://localhost/projetoSocial/api/salvarProblema.php', { problema: problema, tamanho: (this.problema.length), nome:this.nomeImg }).pipe().subscribe((dados) => { this.nomeImg=undefined;this.pegarDoBanco("problema");})
     }
-    this.http.post('http://localhost/projetoSocial/api/update.php',{report:problema.report,id:this.indice}).pipe().subscribe((dados) => { this.nomeImg=undefined;})
-    this.pegarDoBanco("problema");
+    else
+      this.http.post('http://localhost/projetoSocial/api/update.php',{report:problema.report,id:this.indice}).pipe().subscribe((dados) => { this.nomeImg=undefined;this.pegarDoBanco("problema");})
+    
   }
   // delete(indice) {
   //   if (this.problema[indice].report > 1) {
@@ -91,14 +91,18 @@ export class AppService implements OnInit {
   }
   salvarUser(user) {
     for (let index = 0; index < this.user.length; index++) {
-      if (user.rg == this.user[index].rg && user.cpf == this.user[index].cpf)
-        user = {};
+      if (user.rg == this.user[index].rg && user.cpf == this.user[index].cpf){
+        user = false;
         alert("Esse usuario ja está registrado");
+      }
+        
     }
-    if (user != {})
+    if (user != false){
       this.http.post('http://localhost/projetoSocial/api/salvarUser.php', { user: user, tamanho: (this.user.length + 1) }).pipe().subscribe((dados) => { console.log(dados); })
-    this.user.push(user);
-    alert("Usuario registrado com sucesso!")
-  }
+      this.user.push(user);
+      alert("Usuario registrado com sucesso!")
+    }
+    }
+     
 
 }
