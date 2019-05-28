@@ -1,38 +1,60 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-
-import { take, map } from 'rxjs/operators';
+import { take, map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-
 export class AppService implements OnInit {
   nomeImg = undefined;
   logado = false;
   problema: any = [];
   user: any = [];
-  userAux = { nomeCompleto: undefined, senha: undefined, rg: undefined, cpf: undefined, cep: undefined, contato: undefined };
+  userAux = {
+    nomeCompleto: undefined,
+    senha: undefined,
+    rg: undefined,
+    cpf: undefined,
+    cep: undefined,
+    contato: undefined
+  };
   indice = undefined;
   constructor(private http: HttpClient) {
     this.pegarDoBanco("problema");
     this.pegarDoBanco("user");
   }
-  ngOnInit() {
-  }
-  pegarDoBanco(op){
-    if(op === "problema")
-      console.log(this.http.post('http://localhost/projetoSocial/api/select.php', { op: op }).pipe(take(1)).subscribe((problema) => {
-        this.problema = problema; this.problema.sort((a,b)=>a.id-b.id)
-      }));
+  ngOnInit() {}
+  pegarDoBanco(op) {
+    if (op === "problema")
+      this.http
+        .post("http://localhost/projetoSocial/api/select.php", {
+          op: op
+        })
+        .pipe(take(1))
+        .subscribe(problema => {
+          this.problema = problema;
+          this.problema.sort((a, b) => a.id - b.id);
+        });
     else
-      console.log(this.http.post('http://localhost/projetoSocial/api/select.php', { op: op }).pipe(take(1)).subscribe((user) => {
-        this.user = user;this.user.sort((a,b)=>a.id-b.id)
-      }));
+      this.http
+        .post("http://localhost/projetoSocial/api/select.php", {
+          op: op
+        })
+        .pipe(take(1))
+        .subscribe(user => {
+          this.user = user;
+          this.user.sort((a, b) => a.id - b.id);
+        });
   }
-  salvarImagem(problema,imagem) {
-    this.http.post('http://localhost/projetoSocial/api/salvarImg.php', imagem).pipe().subscribe((dados) => { this.nomeImg = dados;this.salvarProblema(problema, imagem) })
+  salvarImagem(problema, imagem) {
+    this.http
+      .post("http://localhost/projetoSocial/api/salvarImg.php", imagem)
+      .pipe()
+      .subscribe(dados => {
+        this.nomeImg = dados;
+        this.salvarProblema(problema, imagem);
+      });
   }
   listarProblemas() {
     return this.problema;
@@ -41,9 +63,12 @@ export class AppService implements OnInit {
     problema.rg = this.userAux["rg"];
     problema.estado = "Em análise";
     for (let index = 0; index < this.problema.length; index++) {
-      if (problema.tipoProblema === this.problema[index].tipoProblema && problema.rua === this.problema[index].rua) {
-        problema.report = parseInt(this.problema[index].report)+1;
-        this.indice = index+1;
+      if (
+        problema.tipoProblema === this.problema[index].tipoProblema &&
+        problema.rua === this.problema[index].rua
+      ) {
+        problema.report = parseInt(this.problema[index].report) + 1;
+        this.indice = index + 1;
         break;
       }
     }
@@ -51,11 +76,28 @@ export class AppService implements OnInit {
       problema.report = 1;
       problema.img = this.nomeImg;
       this.problema.push(problema);
-      this.http.post('http://localhost/projetoSocial/api/salvarProblema.php', { problema: problema, tamanho: (this.problema.length), nome:this.nomeImg }).pipe().subscribe((dados) => { this.nomeImg=undefined;this.pegarDoBanco("problema");})
-    }
-    else
-      this.http.post('http://localhost/projetoSocial/api/update.php',{report:problema.report,id:this.indice}).pipe().subscribe((dados) => { this.nomeImg=undefined;this.pegarDoBanco("problema");})
-    
+      this.http
+        .post("http://localhost/projetoSocial/api/salvarProblema.php", {
+          problema: problema,
+          tamanho: this.problema.length,
+          nome: this.nomeImg
+        })
+        .pipe()
+        .subscribe(dados => {
+          this.nomeImg = undefined;
+          this.pegarDoBanco("problema");
+        });
+    } else
+      this.http
+        .post("http://localhost/projetoSocial/api/update.php", {
+          report: problema.report,
+          id: this.indice
+        })
+        .pipe()
+        .subscribe(dados => {
+          this.nomeImg = undefined;
+          this.pegarDoBanco("problema");
+        });
   }
   // delete(indice) {
   //   if (this.problema[indice].report > 1) {
@@ -66,7 +108,10 @@ export class AppService implements OnInit {
   // }
   testeLoguin(user) {
     for (let index = 0; index < this.user.length; index++) {
-      if (user.cpf === this.user[index].cpf && user.senha === this.user[index].senha) {
+      if (
+        user.cpf === this.user[index].cpf &&
+        user.senha === this.user[index].senha
+      ) {
         this.logado = true;
         this.userAux = this.user[index];
         alert("Login realizado com Sucesso");
@@ -79,8 +124,15 @@ export class AppService implements OnInit {
     return this.user;
   }
   sairLoguin() {
-    this.logado = false
-    this.userAux = { nomeCompleto: undefined, senha: undefined, rg: undefined, cpf: undefined, cep: undefined, contato: undefined };
+    this.logado = false;
+    this.userAux = {
+      nomeCompleto: undefined,
+      senha: undefined,
+      rg: undefined,
+      cpf: undefined,
+      cep: undefined,
+      contato: undefined
+    };
     return this.logado;
   }
   setIndice(indice) {
@@ -91,18 +143,23 @@ export class AppService implements OnInit {
   }
   salvarUser(user) {
     for (let index = 0; index < this.user.length; index++) {
-      if (user.rg == this.user[index].rg && user.cpf == this.user[index].cpf){
+      if (user.rg == this.user[index].rg && user.cpf == this.user[index].cpf) {
         user = false;
         alert("Esse usuario ja está registrado");
       }
-        
     }
-    if (user != false){
-      this.http.post('http://localhost/projetoSocial/api/salvarUser.php', { user: user, tamanho: (this.user.length + 1) }).pipe().subscribe((dados) => { console.log(dados); })
+    if (user != false) {
+      this.http
+        .post("http://localhost/projetoSocial/api/salvarUser.php", {
+          user: user,
+          tamanho: this.user.length + 1
+        })
+        .pipe()
+        .subscribe(dados => {
+          console.log(dados);
+        });
       this.user.push(user);
-      alert("Usuario registrado com sucesso!")
+      alert("Usuario registrado com sucesso!");
     }
-    }
-     
-
+  }
 }

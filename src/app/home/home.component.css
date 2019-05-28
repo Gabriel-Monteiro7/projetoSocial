@@ -6,7 +6,15 @@
 img{
     height: 750px;
 }
-
+@media (max-width: 550px){
+  img{
+    height: 400px;
+  }
+  .container-fluid{
+    width: 70%;
+    margin: auto;
+  }
+}
 p{
     font-size: 17px;
 

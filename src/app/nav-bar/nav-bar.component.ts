@@ -23,11 +23,13 @@ export class NavBarComponent implements OnInit {
   }
 
   logar(){
-    if(!(this.logado = this.servico.testeLoguin(this.userAux)))
+    if(!(this.logado = this.servico.testeLoguin(this.userAux))){
       alert("Login incorreto");
-    else
+      this.userAux ={}
+    }
+
       this.userAux = this.servico.userAux;
-    
+
   }
   sair(){
     this.logado = this.servico.sairLoguin();
@@ -35,7 +37,7 @@ export class NavBarComponent implements OnInit {
   salvarUser(){
     this.servico.salvarUser(this.userAux);
     this.userAux = {nomeCompleto:undefined,senha:undefined,rg:undefined,cpf:undefined,cep:undefined,contato:undefined}
-    
+
   }
 
 }

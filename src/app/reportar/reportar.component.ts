@@ -24,13 +24,13 @@ export class ReportarComponent implements OnInit {
     rg: undefined,
     tipoProblema: undefined
   };
-  constructor(private Service: AppService) {
+  constructor(public Service: AppService) {
   }
   ngOnInit() {
     if (this.Service.indice !== undefined)
       this.problema = this.Service.problema[this.Service.indice];
   }
-  onChange() {
+  onChange(event) {
     this.Service.getEndereco(this.problema.cep).subscribe((user) => {
       this.problema.rua = user["logradouro"],
         this.problema.bairro = user["bairro"],

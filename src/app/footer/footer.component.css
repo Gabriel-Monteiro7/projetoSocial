@@ -3,11 +3,11 @@
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#330d38+0,190d36+100 */
     background: radial-gradient(ellipse at center, #19882c 1%, #025310 100%);
 
-    
+
 }
 .footer-section .container {
     padding: 20px 5px 15px;
-    
+
 }
 
 .footer-logo{
@@ -50,3 +50,9 @@ a i:hover{
 	color: #009EE7
 }
 
+@media (max-width: 550px){
+  .footer-section .container {
+    padding: 20px;
+
+}
+}

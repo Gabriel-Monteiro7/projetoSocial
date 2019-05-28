@@ -20,7 +20,7 @@ if (strstr('.jpg;.jpeg;.gif;.png', $extensao)) {
     // Evita que duplique as imagens no servidor.
     // Evita nomes com acentos, espaços e caracteres não alfanuméricos
     $novoNome = uniqid(time()) . '.' . $extensao;
-    
+
     // Concatena a pasta com o nome
     $destino = '../src/assets/image/imagens/'. $novoNome;
     // tenta mover o arquivo para o destino

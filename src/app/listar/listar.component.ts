@@ -9,11 +9,10 @@ export class ListarComponent implements OnInit {
   problema;
   logado = false;
   ruaCompleta;
-  constructor(private servico: AppService) {
+  constructor(public servico: AppService) {
     this.problema = servico.listarProblemas();
-    console.log(this.problema)
   }
-  
+
   ngOnInit() {
 
   }
