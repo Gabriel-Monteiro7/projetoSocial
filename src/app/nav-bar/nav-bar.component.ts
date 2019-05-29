@@ -27,9 +27,7 @@ export class NavBarComponent implements OnInit {
       alert("Login incorreto");
       this.userAux ={}
     }
-
       this.userAux = this.servico.userAux;
-
   }
   sair(){
     this.logado = this.servico.sairLoguin();

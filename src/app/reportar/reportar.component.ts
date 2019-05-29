@@ -48,8 +48,8 @@ export class ReportarComponent implements OnInit {
     this.Service.nomeImg = img.name;
   }
   onSubmit() {
+    alert("Problema cadastrado com sucesso!")
     this.Service.salvarImagem(this.problema,this.imagem);
-
     this.problema = {
       img: undefined,
       report: undefined,

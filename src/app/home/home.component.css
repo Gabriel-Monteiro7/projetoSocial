@@ -8,10 +8,10 @@ img{
 }
 @media (max-width: 550px){
   img{
-    height: 400px;
+    height: 350px;
   }
   .container-fluid{
-    width: 70%;
+    width: 60%;
     margin: auto;
   }
 }
