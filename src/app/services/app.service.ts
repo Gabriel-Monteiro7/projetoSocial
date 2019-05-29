@@ -28,7 +28,7 @@ export class AppService implements OnInit {
   pegarDoBanco(op) {
     if (op === "problema")
       this.http
-        .post("http://localhost/projetoSocial/api/select.php", {
+        .post("http://projetosocial.ga/projetoSocial/api/select.php", {
           op: op
         })
         .pipe(take(1))
@@ -38,7 +38,7 @@ export class AppService implements OnInit {
         });
     else
       this.http
-        .post("http://localhost/projetoSocial/api/select.php", {
+        .post("http://projetosocial.ga/projetoSocial/api/select.php", {
           op: op
         })
         .pipe(take(1))
@@ -49,7 +49,7 @@ export class AppService implements OnInit {
   }
   salvarImagem(problema, imagem) {
     this.http
-      .post("http://localhost/projetoSocial/api/salvarImg.php", imagem)
+      .post("http://projetosocial.ga/projetoSocial/api/salvarImg.php", imagem)
       .pipe()
       .subscribe(dados => {
         this.nomeImg = dados;
@@ -77,7 +77,7 @@ export class AppService implements OnInit {
       problema.img = this.nomeImg;
       this.problema.push(problema);
       this.http
-        .post("http://localhost/projetoSocial/api/salvarProblema.php", {
+        .post("http://projetosocial.ga/projetoSocial/api/salvarProblema.php", {
           problema: problema,
           tamanho: this.problema.length,
           nome: this.nomeImg
@@ -89,7 +89,7 @@ export class AppService implements OnInit {
         });
     } else
       this.http
-        .post("http://localhost/projetoSocial/api/update.php", {
+        .post("http://projetosocial.ga/projetoSocial/api/update.php", {
           report: problema.report,
           id: this.indice
         })
@@ -150,7 +150,7 @@ export class AppService implements OnInit {
     }
     if (user != false) {
       this.http
-        .post("http://localhost/projetoSocial/api/salvarUser.php", {
+        .post("http://projetosocial.ga/projetoSocial/api/salvarUser.php", {
           user: user,
           tamanho: this.user.length + 1
         })

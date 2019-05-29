@@ -45,12 +45,12 @@
             <h2 class="text-center">{{opcao.titulo}}</h2>
             <div *ngIf="opcao.titulo === 'Login'">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="CPF" required="required"
-                  [(ngModel)]="userAux.cpf" name="Cpf" required>
+                <input type="text" class="form-control" placeholder="CPF" required="required" minlength="11" maxlength="11"
+                  [(ngModel)]="userAux.cpf" name="cpf" required>
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" placeholder="Password" required="required"
-                  [(ngModel)]="userAux.senha" name="Senha" required>
+                  [(ngModel)]="userAux.senha" name="senha" required>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-success btn-block" data-dismiss="modal" aria-label="Close"
@@ -64,20 +64,20 @@
                   [(ngModel)]="userAux.nomeCompleto" name="nomeCompleto" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="RG" required="required"
+                <input type="text" class="form-control" placeholder="RG" required="required" minlength="11" maxlength="11"
                   [(ngModel)]="userAux.rg" name="rg" required>
               </div>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="CPF" required="required"
-                  [(ngModel)]="userAux.cpf" name="cpf" required minlength="11" maxlength="11" pattern="[0-9 ' ']+">
+                  [(ngModel)]="userAux.cpf" name="cpf" required minlength="11" maxlength="11" pattern="[0-9]">
               </div>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="CEP" required="required"
-                  [(ngModel)]="userAux.cep" name="cep" required minlength="8" maxlength="8" pattern="[0-9 ' ']+">
+                  [(ngModel)]="userAux.cep" name="cep" required minlength="8" maxlength="8" pattern="[0-9]">
               </div>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Contato" required="required"
-                  [(ngModel)]="userAux.contato" name="contato" required pattern="[0-9 ' ']+" minlength="9" maxlength="9">
+                  [(ngModel)]="userAux.contato" name="contato" required pattern="[0-9]+" minlength="9" maxlength="9">
               </div>
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Password" required="required"

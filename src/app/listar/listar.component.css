@@ -66,86 +66,143 @@ h4{
     font-size: 18px;
 	  font-weight: 500;
 }
-
+.opcao{
+  height: 20px;
+  margin-top: -5px;
+}
 .opcao p{
 	border-radius: 5px;
 	color: aliceblue;
-	padding: 0 30px
+  padding: 0 30px;
 }
 .status {
-	width: 180px;
+	width: 150px;
 	text-align: center;
-
 	display: -webkit-inline-flex;
 }
 .botoes{
 	display: contents;
 }
 
-@media (max-width: 550px){
+@media (max-width: 1000px){
   .col-sm-8{
-    width: 340px;
+    width: 470px;
   }
   .review-content {
-    width: 380px;
+    width: 450px;
 
   }
   .col-sm-4{
-    width: 100px;
+    width: 140px;
     padding: 0 5px;
+    margin-right: -15px
   }
   img{
     border-radius: 10px;
-    height: 100px;
+    height: 120px;
     margin-left: 0px;
-    width: 200px;
+    width: 170px;
   }
   h4{
-    font-size: 15px;
-
+    font-size: 18px;
   }
   .review-content .top-meta{
     font-size: 9px;
   }
   .col-sm-8 .review-content h3 {
-    font-size: 14px;
+    font-size: 15px;
     margin-bottom: 5px;
   }
   .col-sm-8 .review-content .rating h5 i{
-    font-size: 9px;
+    font-size: 8px;
   }
   .col-sm-8 .review-content .rating h5 {
-    font-size: 14px;
+    font-size: 15px;
   }
   p{
-    font-size: 8px;
+    font-size: 10px;
   }
   h6{
-    font-size: 8px;
+    font-size: 12px;
   }
   .opcao p{
     border-radius: 3px;
     padding: 0 10px
   }
 }
-
-@media (max-width: 450px){
+@media (max-width: 600px){
   .col-sm-8{
-    width: 260px;
+    width: 350px;
   }
   .review-content {
-    width: 260px;
+    width: 330px;
 
   }
   .col-sm-4{
-    width:80px;
+    width:110px;
     padding: 0 5px;
+    margin-right: -15px
   }
   img{
     border-radius: 10px;
-    height: 85px;
+    height: 80px;
     margin-left: 0px;
     width: 100px;
+  }
+  h4{
+    font-size: 14px;
+
+  }
+  .review-content .top-meta{
+    font-size: 9px;
+  }
+  .col-sm-8 .review-content h3 {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  .col-sm-8 .review-content .rating h5 i{
+    font-size: 8px;
+  }
+  .col-sm-8 .review-content .rating h5 {
+    font-size: 12px;
+  }
+  p{
+    font-size: 7px;
+  }
+  h6{
+    font-size: 8px;
+    padding: 0;
+  }
+  .opcao p{
+    border-radius: 5px;
+    padding: 0 7px
+  }
+  .opcao{
+    height: 20px;
+    margin-top: -15px;
+  }
+}
+
+
+
+@media (max-width: 400px){
+  .col-sm-8{
+    width: 200px;
+  }
+  .review-content {
+    width: 200px;
+
+  }
+  .col-sm-4{
+    width:90px;
+    padding: 0 5px;
+    margin-right: -15px
+  }
+  img{
+    border-radius: 10px;
+    height: 70px;
+    margin-left: 0px;
+    width: 70px;
   }
   h4{
     font-size: 9px;
@@ -174,6 +231,10 @@ h4{
   .opcao p{
     border-radius: 3px;
     padding: 0 7px
+  }
+  .opcao{
+    height: 20px;
+    margin-top: -15px;
   }
 }
 
